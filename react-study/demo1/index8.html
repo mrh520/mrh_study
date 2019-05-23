@@ -1,0 +1,98 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+class TestComponentlife extends React.Component {
+
+    componentWillMount(){
+        console.log("1、componentWillMount：在渲染前调用");
+        
+    }
+    componentDidMount(){
+        console.log('2、componentDidMount：在第一次渲染后调用')
+    }
+
+    componentWillReceiveProps(){
+        console.log('3、componentWillReceiveProps：在组件接收到一个新的 prop (更新后)时被调用');
+    }
+
+    // shouldComponentUpdate(){
+    //     console.log('4、shouldComponentUpdate：在组件接收到新的props或者state时被调用。在初始化时或者使用forceUpdate时不被调用。 ')
+    // }
+
+    compoenetWillUpdate(){
+        console.log('5、compoenetWillUpdate：在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。');
+        
+    }
+
+    componentDidUpdate(){
+        console.log('6、componentDidUpdate：在组件完成更新后立即调用。在初始化时不会被调用。')
+    }
+
+    componentWillUnmount(){
+        console.log('7、componentWillUnmount：在组件从 DOM 中移除之前立刻被调用。')
+    }
+
+    constructor(props){
+            super(props);
+            this.state={
+                clickCount:0,
+                inputValue:'mrh'
+            };
+            this.handleClick=this.handleClick.bind(this);
+            this.handleChange=this.handleChange.bind(this);
+        }
+        handleClick(){
+            this.setState(function (state) {
+                return {
+                    clickCount:state.clickCount+1
+                }
+            });
+        }
+        handleChange(){
+           
+          
+            this.setState(function (state) {              
+                return {                  
+                  inputValue:this.refs.myText.value
+                }
+            });
+        }
+        render() {
+            return (
+             <div>
+              <h2 onClick={this.handleClick}>点我！点击次数为：{this.state.clickCount}</h2>  
+             <input onChange={this.handleChange} defaultValue={this.state.inputValue}  ref="myText"/> 
+             <span>值为：{this.state.inputValue}</span>
+             </div>
+                      
+            )
+        }
+    }
+
+function App() {
+   
+        return (
+        <div>
+         <TestComponentlife />
+        <TestComponentlife />
+        <TestComponentlife />
+     </div>)
+}
+ReactDOM.render(<App />,
+document.getElementById('app'))
+</script>
+</body>
+
+</html>

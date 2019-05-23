@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React 实例</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    class MyForm extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                value:'cocount'
+            }
+            this.handleChange=this.handleChange.bind(this);
+            this.handleSubmit=this.handleSubmit.bind(this);
+        }
+        handleChange(event){
+            this.setState({
+                value:event.target.value
+            })
+        }
+
+        handleSubmit(event){
+            alert(this.state.value);
+            event.preventDefault();           
+        }
+        render(){
+            return(
+            <form onSubmit={this.handleSubmit}>
+          <label>
+          选择您最喜欢的网站
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="gg">Google</option>
+            <option value="rn">Runoob</option>
+            <option value="tb">Taobao</option>
+            <option value="fb">Facebook</option>
+          </select>
+        </label>
+        <input type="submit" value="提交" />
+             </form>
+            )
+        }
+    }
+    ReactDOM.render(
+  <MyForm />,
+  document.getElementById('app')
+);
+</script>
+</body>
+
+</html>
